@@ -19,49 +19,57 @@ namespace CalculadoraBasica
 
         private void CalcularButton_Click(object sender, RoutedEventArgs e)
         {
-            int operando1 = int.Parse(Operando1TextBox.Text);
-            int operando2 = int.Parse(Operando2TextBox.Text);
-            int resultado = default;
-
-            switch (OperadorTextBox.Text)
+            try
             {
-                case "+":
-                    resultado = operando1 + operando2;
-                    break;
-                case "-":
-                    resultado = operando1 - operando2;
-                    break;
-                case "*":
-                    resultado = operando1 * operando2;
-                    break;
-                case "/":
-                    resultado = operando1 / operando2;
-                    break;
-                default:
-                    ResultadoTextBox.Text = "ERROR";
-                    break;
+                double operando1 = double.Parse(Operando1TextBox.Text);
+                double operando2 = double.Parse(Operando2TextBox.Text);
+                double resultado = default;
+
+                switch (OperadorTextBox.Text)
+                {
+                    case "+":
+                        resultado = operando1 + operando2;
+                        break;
+                    case "-":
+                        resultado = operando1 - operando2;
+                        break;
+                    case "*":
+                        resultado = operando1 * operando2;
+                        break;
+                    case "/":
+                        resultado = operando1 / operando2;
+                        break;
+                    default:
+                        ResultadoTextBox.Text = "ERROR";
+                        break;
+                }
+                resultado = Math.Round(resultado, 2);
+                ResultadoTextBox.Text = resultado.ToString();
             }
-            ResultadoTextBox.Text = resultado.ToString();
+            catch (Exception)
+            {
+                CalcularButton.IsEnabled = false;
+                MessageBox.Show("Se ha producido un error.\nRevise los comandos");
+            }
+
+
         }
         public void ValidaOperador()
         {
             string[] operadores = new string[] { "-", "+", "/", "*" };
-            bool esOperadorValido = false; 
+            bool esOperadorValido = false;
 
-            try
+            foreach (string op in operadores)
             {
-                foreach (string op in operadores)
+                if (Equals(op, OperadorTextBox.Text))
                 {
-                    if (Equals(op, OperadorTextBox.Text))
-                    {
-                        esOperadorValido = true;
-                        break;
-                    }
+                    esOperadorValido = true;
+                    break;
                 }
-                if (esOperadorValido) CalcularButton.IsEnabled = true;
-                else CalcularButton.IsEnabled = false;
             }
-            catch (Exception) { CalcularButton.IsEnabled = false; }
+            if (esOperadorValido) CalcularButton.IsEnabled = true;
+            else CalcularButton.IsEnabled = false;
+
         }
 
         private void OperadorTextBox_TextChanged(object sender, TextChangedEventArgs e)
