@@ -19,7 +19,7 @@ namespace CalculadoraBasica
 
         private void CalcularButton_Click(object sender, RoutedEventArgs e)
         {
-            int operando1 = int.Parse(Operando1TextBox.Text);
+            int operando1 = int.Parse(Operando1TextBox.Text); 
             int operando2 = int.Parse(Operando2TextBox.Text);
             int resultado = default;
 
