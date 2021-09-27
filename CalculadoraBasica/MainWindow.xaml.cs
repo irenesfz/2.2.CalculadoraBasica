@@ -46,7 +46,7 @@ namespace CalculadoraBasica
         public void ValidaOperador()
         {
             string[] operadores = new string[] { "-", "+", "/", "*" };
-            bool esOperadorValido = false;
+            bool esOperadorValido = false; 
 
             try
             {
