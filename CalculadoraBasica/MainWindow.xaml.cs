@@ -57,18 +57,16 @@ namespace CalculadoraBasica
         public void ValidaOperador()
         {
             string[] operadores = new string[] { "-", "+", "/", "*" };
-            bool esOperadorValido = false;
 
             foreach (string op in operadores)
             {
                 if (Equals(op, OperadorTextBox.Text))
                 {
-                    esOperadorValido = true;
+                    CalcularButton.IsEnabled = true;
                     break;
                 }
+                else CalcularButton.IsEnabled = false;
             }
-            if (esOperadorValido) CalcularButton.IsEnabled = true;
-            else CalcularButton.IsEnabled = false;
 
         }
 
